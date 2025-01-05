@@ -1,46 +1,35 @@
 from typing import Self
-class EarthBender:
-    # Return type is None due to: https://peps.python.org/pep-0484/#the-meaning-of-annotations
+import os
+import re
+
+from tlab.bender_base import BenderBase
+
+
+class EarthBender(BenderBase):
+
+    DEFAULT_NO_ROCK_ROLL_PATTERN = 'No Rock Ball :('
+    VALIDATION_RGX = r'rock ball'
+
     def __init__(
         self: Self,
         name: str,
         power: int,
     ) -> None:
-        raise NotImplementedError("You Should Implement this method")
 
-    @property
-    def name(
-        self: Self,
-    ) -> str:
-        raise NotImplementedError("You Should Implement this method")
+        self._verify_power(power)
 
-    @name.setter
-    def name(
-        self: Self,
-        name: str,
-    ) -> None:
-        raise NotImplementedError("You Should Implement this method")
-
-    @property
-    def power(
-        self: Self,
-    ) -> int:
-        raise NotImplementedError("You Should Implement this method")
-
-    @power.setter
-    def power(
-        self: Self,
-        power: int,
-    ) -> None:
-        raise NotImplementedError("You Should Implement this method")
-
-    @property
-    def skill(
-        self: Self,
-    ) -> str:
-        raise NotImplementedError("You Should Implement this method")
+        super().__init__(name, power, 'Earthbending')
 
     def bend(
         self: Self,
     ) -> None:
-        raise NotImplementedError("You Should Implement this method")
+        bend_message = os.getenv("EARTH_ATTACK") or ''
+
+        if re.compile(EarthBender.VALIDATION_RGX, re.IGNORECASE).match(bend_message) is None:
+            bend_message = EarthBender.DEFAULT_NO_ROCK_ROLL_PATTERN
+            os.environ["EARTH_ATTACK"] = bend_message
+        else:
+            bend_message = f"{bend_message} with power: {str(self._power).ljust(2, ' ')}.".lower()
+
+        print(bend_message, end='')
+

@@ -1,50 +1,32 @@
 import random
 from typing import Self
 
+from tlab.bender_base import BenderBase
 
-class FireBender:
+
+class FireBender(BenderBase):
     # Return type is None due to: https://peps.python.org/pep-0484/#the-meaning-of-annotations
     def __init__(
         self: Self,
         name: str,
         power: int,
-        random_generator: random.Random = random,
+        random_generator: random.Random = random.Random(),
     ) -> None:
-        raise NotImplementedError("You Should Implement this method")
 
-    @property
-    def name(
-        self: Self,
-    ) -> str:
-        raise NotImplementedError("You Should Implement this method")
+        self._verify_power(power)
 
-    @name.setter
-    def name(
-        self: Self,
-        name: str,
-    ) -> None:
-        raise NotImplementedError("You Should Implement this method")
+        self.random_generator = random_generator
 
-    @property
-    def power(
-        self: Self,
-    ) -> int:
-        raise NotImplementedError("You Should Implement this method")
+        super().__init__(name, power, 'Firebending')
 
-    @power.setter
-    def power(
-        self: Self,
-        power: int,
-    ) -> None:
-        raise NotImplementedError("You Should Implement this method")
 
-    @property
-    def skill(
-        self: Self,
-    ) -> str:
-        raise NotImplementedError("You Should Implement this method")
 
     def bend(
         self: Self,
     ) -> None:
-        raise NotImplementedError("You Should Implement this method")
+        result = self.random_generator.randint(0, 6)
+
+        if result == 0:
+            self._name = 'dead'
+        elif result == 6:
+            raise SystemExit(result)

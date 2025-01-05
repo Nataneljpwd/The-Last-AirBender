@@ -1,6 +1,13 @@
+from typing import Self
+
+
 class InvalidPowerValueError(ValueError):
-    pass
+
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
 
 
 class InvalidPowerTypeError(TypeError):
-    pass
+    
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)

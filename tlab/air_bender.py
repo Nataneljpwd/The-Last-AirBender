@@ -1,48 +1,36 @@
-from typing import Self
+from logging import INFO, log
+from typing import Self, override
+
+from tlab.bender_base import BenderBase
 
 
-class AirBender:
-    # Return type is None due to: https://peps.python.org/pep-0484/#the-meaning-of-annotations
+class AirBender(BenderBase):
+
     def __init__(
         self: Self,
         name: str,
         power: int,
     ) -> None:
-        raise NotImplementedError("You Should Implement this method")
+
+        self._verify_power(power)
+
+        super().__init__(name, power, "Airbending") # maybe change to config instead of hardcode
+
 
     @property
-    def name(
-        self: Self,
-    ) -> str:
-        raise NotImplementedError("You Should Implement this method")
+    def power(self) -> int:
+        return self._power
 
-    @name.setter
-    def name(
-        self: Self,
-        name: str,
-    ) -> None:
-        raise NotImplementedError("You Should Implement this method")
-
-    @property
-    def power(
-        self: Self,
-    ) -> int:
-        raise NotImplementedError("You Should Implement this method")
 
     @power.setter
-    def power(
-        self: Self,
-        power: int,
-    ) -> None:
-        raise NotImplementedError("You Should Implement this method")
+    def power(self: Self, power: int) -> None:
 
-    @property
-    def skill(
-        self: Self,
-    ) -> str:
-        raise NotImplementedError("You Should Implement this method")
+        self._verify_power(power)
 
-    def bend(
-        self: Self,
-    ) -> None:
-        raise NotImplementedError("You Should Implement this method")
+        self._power = power
+
+
+    def bend(self) -> None:
+
+        log(INFO, "Aang is using his airbending skill!")
+
