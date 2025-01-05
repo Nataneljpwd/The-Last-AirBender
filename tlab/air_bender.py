@@ -5,29 +5,26 @@ from tlab.bender_base import BenderBase
 
 
 class AirBender(BenderBase):
+        def __init__(
+                self: Self,
+                name: str,
+                power: int,
+        ) -> None:
+                self._verify_power(power)
 
-    def __init__(
-        self: Self,
-        name: str,
-        power: int,
-    ) -> None:
+                super().__init__(
+                        name, power, "Airbending"
+                )  # maybe change to config instead of hardcode
 
-        self._verify_power(power)
+        @property
+        def power(self) -> int:
+                return self._power
 
-        super().__init__(name, power, "Airbending")  # maybe change to config instead of hardcode
+        @power.setter
+        def power(self: Self, power: int) -> None:
+                self._verify_power(power)
 
-    @property
-    def power(self) -> int:
-        return self._power
+                self._power = power
 
-    @power.setter
-    def power(self: Self, power: int) -> None:
-
-        self._verify_power(power)
-
-        self._power = power
-
-    def bend(self) -> None:
-
-        log(INFO, "Aang is using his airbending skill!")
-
+        def bend(self) -> None:
+                log(INFO, "Aang is using his airbending skill!")

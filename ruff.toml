@@ -2,8 +2,8 @@ respect-gitignore = true
 show-fixes = true
 
 # Same as Black.
-line-length = 88
-indent-width = 4
+line-length = 100
+indent-width = 8
 
 target-version = "py311"
 
