@@ -17,9 +17,7 @@ class FireBender(BenderBase):
 
         self.random_generator = random_generator
 
-        super().__init__(name, power, 'Firebending')
-
-
+        super().__init__(name, power, "Firebending")
 
     def bend(
         self: Self,
@@ -27,6 +25,6 @@ class FireBender(BenderBase):
         result = self.random_generator.randint(0, 6)
 
         if result == 0:
-            self._name = 'dead'
+            self._name = "dead"
         elif result == 6:
             raise SystemExit(result)
