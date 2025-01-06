@@ -1,4 +1,4 @@
-from logging import INFO, log
+from logging import INFO, Logger, getLogger
 from typing import Self
 
 from tlab.bender_base import BenderBase
@@ -9,10 +9,13 @@ class AirBender(BenderBase):
                 self: Self,
                 name: str,
                 power: int,
+                logger: Logger = getLogger(__name__),
         ) -> None:
                 super().__init__(
                         name, power, "Airbending"
                 )  # maybe change to config instead of hardcode
+
+                self._logger = logger
 
         @property
         def power(self) -> int:
@@ -25,4 +28,4 @@ class AirBender(BenderBase):
                 self._power = power
 
         def bend(self) -> None:
-                log(INFO, "Aang is using his airbending skill!")
+                self._logger.log(INFO, "Aang is using his airbending skill!")

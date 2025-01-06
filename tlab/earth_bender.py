@@ -14,7 +14,7 @@ class EarthBender(BenderBase):
                 self: Self,
                 name: str,
                 power: int,
-                writer: Callable = lambda *args: print(*args)
+                writer: Callable = lambda *args: print(*args, end="")
         ) -> None:
                 super().__init__(name, power, "Earthbending")
                 self._writer = writer
@@ -33,4 +33,4 @@ class EarthBender(BenderBase):
                 else:
                         bend_message = f"{bend_message} with power: {str(self._power).ljust(2, ' ')}.".lower()
 
-                self._writer(bend_message, end="")
+                self._writer(bend_message)
