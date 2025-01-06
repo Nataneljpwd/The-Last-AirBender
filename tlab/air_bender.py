@@ -10,8 +10,6 @@ class AirBender(BenderBase):
                 name: str,
                 power: int,
         ) -> None:
-                self._verify_power(power)
-
                 super().__init__(
                         name, power, "Airbending"
                 )  # maybe change to config instead of hardcode

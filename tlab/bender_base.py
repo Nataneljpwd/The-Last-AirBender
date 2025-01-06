@@ -8,6 +8,7 @@ class BenderBase:
         INVALID_POWER_LEVEL_ERROR_MESSAGE = "Power level must be a positive integer"
 
         def __init__(self: Self, name: str, power: int, skill: str) -> None:
+                self._verify_power(power)
                 self._name = name
                 self._power = power
                 self._skill = skill
