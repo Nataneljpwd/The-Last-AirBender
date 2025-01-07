@@ -3,7 +3,7 @@ show-fixes = true
 
 # Same as Black.
 line-length = 100
-indent-width = 8
+indent-width = 4
 
 target-version = "py311"
 
