@@ -11,7 +11,10 @@ WORKDIR /app
 COPY poetry.toml .
 COPY pyproject.toml .
 
-RUN python -m poetry install --no-root
+
+COPY README.md .
+
+RUN python -m poetry install
 
 # Copy rest of project
 

@@ -1,6 +1,6 @@
 class InvalidPowerValueError(ValueError):
-    pass
+        pass
 
 
 class InvalidPowerTypeError(TypeError):
-    pass
+        pass

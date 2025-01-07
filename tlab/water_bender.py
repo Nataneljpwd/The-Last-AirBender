@@ -22,14 +22,13 @@ class WaterBender(BenderBase, DefaultStrategyMapMixin):
 
                 self.browser = browser
 
-                self._strategy_map = defaultdict(lambda:self._get_fallback_strategy(), self._strategy_map)
-
+                self._strategy_map = defaultdict(self._get_fallback_strategy, self._strategy_map)
 
         def _get_default_strategy_map(self) -> dict[str, Callable[[BaseBrowser], None]]:
                 s_map = {}
 
                 s_map["NONE"] = lambda browser: browser.open_new(
-                        f"https://youtu.be/gk-aCL6eyGc?si=XX45XZzc3a8uCN0o&t={self._power}"
+                        f"https://youtu.be/gk-aCL6eyGc?si=XX45XZzc3a8uCN0o&t={self._power}",
                 )
 
                 s_map["FULL"] = lambda browser: browser.open_new("https://www.wikiwand.com/en/6")
@@ -38,7 +37,7 @@ class WaterBender(BenderBase, DefaultStrategyMapMixin):
 
         def _get_fallback_strategy(self: Self) -> Callable[[BaseBrowser], None]:
                 result = lambda browser: browser.open_new(
-                        "https://youtu.be/weZKm1kTrpc?si=_Unblsn5tPvzwfs7"
+                        "https://youtu.be/weZKm1kTrpc?si=_Unblsn5tPvzwfs7",
                 )
 
                 return result
@@ -58,7 +57,6 @@ class WaterBender(BenderBase, DefaultStrategyMapMixin):
                 strategy = self._strategy_map[moon_status]
 
                 if strategy is None:
-                    raise RuntimeError("Should never happen due to defaultdict")
+                        raise RuntimeError("Should never happen due to defaultdict")
 
                 strategy(self.browser)
-

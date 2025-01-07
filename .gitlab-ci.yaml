@@ -1,0 +1,44 @@
+include:
+  - project: 'swepy/cicd-templates/ruff'
+    ref: 'ruff@1.0.2'
+    file: 'ruff.yaml'
+
+stages:
+  - format
+  - lint
+  - build
+  - test
+  - deploy
+
+format-job:
+  stage: format
+  image: registry.gitlab.com/pipeline-components/ruff:latest
+  script:
+    - ruff format
+
+lint-job:
+  stage: lint
+  image: registry.gitlab.com/pipeline-components/ruff:latest
+  script:
+    - ruff check --fix
+    - ruff check --output-format=gitlab .
+  needs:
+    - format
+  
+
+build-job:
+  stage: build
+  image: docker:latest
+  script:
+    - docker build -t avatar:$CI_COMMIT_SHORT_SHA .
+  needs:
+    - lint
+
+test-job:
+  stage: test
+  image: docker:latest
+  script:
+    - docker run -t -d avatar:$CI_COMMIT_SHORT_SHA
+    - docker exec -i -t avatar:$CI_COMMIT_SHORT_SHA sh
+    - python -m pytest test/*.py
+  

@@ -5,6 +5,7 @@ description = "Explore OOP with elemental bending in \"Avatar: The Last AirBende
 authors = ["Avihai Shalom <avihais12344@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.11"

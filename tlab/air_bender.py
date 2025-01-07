@@ -12,7 +12,9 @@ class AirBender(BenderBase):
                 logger: Logger = getLogger(__name__),
         ) -> None:
                 super().__init__(
-                        name, power, "Airbending"
+                        name,
+                        power,
+                        "Airbending",
                 )  # maybe change to config instead of hardcode
 
                 self._logger = logger

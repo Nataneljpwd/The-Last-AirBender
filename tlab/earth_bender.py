@@ -1,6 +1,6 @@
-from collections.abc import Callable
 import os
 import re
+from collections.abc import Callable
 from typing import Self
 
 from tlab.bender_base import BenderBase
@@ -14,7 +14,7 @@ class EarthBender(BenderBase):
                 self: Self,
                 name: str,
                 power: int,
-                writer: Callable = lambda *args: print(*args, end="")
+                writer: Callable = lambda *args: print(*args, end=""),
         ) -> None:
                 super().__init__(name, power, "Earthbending")
                 self._writer = writer
@@ -24,10 +24,7 @@ class EarthBender(BenderBase):
         ) -> None:
                 bend_message = os.getenv("EARTH_ATTACK") or ""
 
-                if (
-                        EarthBender.VALIDATION_RGX.match(bend_message)
-                        is None
-                ):
+                if EarthBender.VALIDATION_RGX.match(bend_message) is None:
                         bend_message = EarthBender.DEFAULT_NO_ROCK_ROLL_PATTERN
                         os.environ["EARTH_ATTACK"] = bend_message
                 else:
