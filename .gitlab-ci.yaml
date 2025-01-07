@@ -42,3 +42,11 @@ test-job:
     - docker exec -i -t avatar:$CI_COMMIT_SHORT_SHA sh
     - python -m pytest test/*.py
   
+deploy-job:
+  stage: deploy
+  image: docker:latest
+  needs:
+    - test
+  script:
+    - echo $DOCKER_ACCESS_TOKEN | docker login $DOCKER_REGISTRY -u $DOCKER_USERNAME --password-stdin
+    - docker push $DOCKER_REGISTRY/nrlp/avatar/avatar:$CI_COMMIT_SHORT_SHA
